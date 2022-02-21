@@ -6,6 +6,7 @@
 #include "MHZ.h"
 
 const int MHZ14A = 14;
+const int MHZ14B = 114;
 const int MHZ19B = 119;
 const int MHZ19C = 219;
 const int MHZ_2K = 1;
@@ -13,10 +14,12 @@ const int MHZ_5K = 2;
 const int MHZ_10K = 3;
 
 const unsigned long MHZ14A_PREHEATING_TIME = 3L * 60L * 1000L;
+const unsigned long MHZ14B_PREHEATING_TIME = 1L * 30L * 1000L;
 const unsigned long MHZ19B_PREHEATING_TIME = 3L * 60L * 1000L;
 const unsigned long MHZ19C_PREHEATING_TIME = 1L * 60L * 1000L;
 
 const unsigned long MHZ14A_RESPONSE_TIME = (unsigned long)60 * 1000;
+const unsigned long MHZ14B_RESPONSE_TIME = (unsigned long)90 * 1000;
 const unsigned long MHZ19B_RESPONSE_TIME = (unsigned long)120 * 1000;
 const unsigned long MHZ19C_RESPONSE_TIME = (unsigned long)120 * 1000;
 
@@ -81,6 +84,8 @@ void MHZ::setDebug(boolean enable) {
 boolean MHZ::isPreHeating() {
   if (_type == MHZ14A) {
     return millis() < (MHZ14A_PREHEATING_TIME);
+  } else if (_type == MHZ14B) {
+    return millis() < (MHZ14B_PREHEATING_TIME);
   } else if (_type == MHZ19B) {
     return millis() < (MHZ19B_PREHEATING_TIME);
   } else if (_type == MHZ19C) {
@@ -96,6 +101,8 @@ boolean MHZ::isReady() {
     return false;
   } else if (_type == MHZ14A) {
     return lastRequest < millis() - MHZ14A_RESPONSE_TIME;
+  } else if (_type == MHZ14B) {
+    return lastRequest < millis() - MHZ14B_RESPONSE_TIME;
   } else if (_type == MHZ19B) {
     return lastRequest < millis() - MHZ19B_RESPONSE_TIME;
   } else if (_type == MHZ19C) {

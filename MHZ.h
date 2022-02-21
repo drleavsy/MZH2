@@ -15,6 +15,7 @@
 
 // types of sensors.
 extern const int MHZ14A;
+extern const int MHZ14B;
 extern const int MHZ19B;
 extern const int MHZ19C;
 extern const int MHZ_2K;
